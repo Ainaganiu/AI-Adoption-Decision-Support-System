@@ -94,6 +94,35 @@ Notes:
 - The service must be able to reach your MySQL host from the public internet or through your network design.
 - This app creates the target database and table on startup, so the configured MySQL user needs permission to create the database if it does not already exist.
 
+## Deploying To Render
+This repository is also ready for Render with [render.yaml](/mnt/c/Users/ainag/Documents/AI Adoption System/render.yaml).
+
+If you deploy manually in Render, use:
+
+```text
+Build Command: pip install -r requirements.txt
+Start Command: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+Health Check Path: /health
+```
+
+Render should use Python 3.12.3 for this repo via [.python-version](/mnt/c/Users/ainag/Documents/AI Adoption System/.python-version).
+
+Set these environment variables in Render:
+
+```text
+DSS_LLM_PROVIDER=huggingface
+DSS_HF_MODEL=meta-llama/Llama-3.1-8B-Instruct:fastest
+DSS_HF_API_URL=https://router.huggingface.co/v1/chat/completions
+DSS_HF_MAX_NEW_TOKENS=450
+DSS_HF_TEMPERATURE=0.2
+DSS_HF_TOKEN=...
+DSS_MYSQL_HOST=...
+DSS_MYSQL_PORT=...
+DSS_MYSQL_USER=...
+DSS_MYSQL_PASSWORD=...
+DSS_MYSQL_DB=...
+```
+
 Key endpoints:
 - `GET /health` – service check.
 - `GET /survey` – returns the structured survey definition.

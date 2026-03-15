@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: ai-adoption-decision-support-system
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.3
+      - key: DSS_LLM_PROVIDER
+        value: huggingface
+      - key: DSS_HF_MODEL
+        value: meta-llama/Llama-3.1-8B-Instruct:fastest
+      - key: DSS_HF_API_URL
+        value: https://router.huggingface.co/v1/chat/completions
+      - key: DSS_HF_MAX_NEW_TOKENS
+        value: "450"
+      - key: DSS_HF_TEMPERATURE
+        value: "0.2"
+      - key: DSS_HF_TOKEN
+        sync: false
+      - key: DSS_MYSQL_HOST
+        sync: false
+      - key: DSS_MYSQL_PORT
+        sync: false
+      - key: DSS_MYSQL_USER
+        sync: false
+      - key: DSS_MYSQL_PASSWORD
+        sync: false
+      - key: DSS_MYSQL_DB
+        sync: false
