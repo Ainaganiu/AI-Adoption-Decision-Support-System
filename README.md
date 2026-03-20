@@ -140,9 +140,3 @@ Key endpoints:
 - Automated: `python3 -m compileall app` verifies syntax; add pytest/unit tests as the project grows.
 - Manual: use `uvicorn` locally and hit the endpoints with cURL or the FastAPI docs (`/docs`).
 - User testing: recruit professionals, have them complete the survey, review the generated recommendation, and capture qualitative feedback for prompt or heuristic adjustments.
-
-## Next Steps
-1. Build a Streamlit or React survey UI that consumes `GET /survey` and posts responses.
-2. Expand analytics/export tooling for stored responses.
-3. Add authentication + rate limiting before rolling out widely.
-4. Iterate on prompts or fine-tune models based on real submissions.
